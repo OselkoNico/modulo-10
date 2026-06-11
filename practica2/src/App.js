@@ -4,12 +4,21 @@ import Card from './component/Card';
 import Footer from './component/Footer';
 
 function App() {
+
+  const movies = [
+    {id: 1, title: 'Pulp Fiction', director: 'Quentin Tarantino'},
+    {id: 2, title: 'Regreso el Futuro', director: 'Robert Zemeckis'},
+    {id: 3, title: 'El Padrino', director: 'Francis Ford Coppola'},
+  ]
+
   return (
     <>
       <div className="container">
-          <h1>Bienvenidos a nuestra aplicación</h1>
-          <Card />
-          <Card />
+        {
+          movies.map(elem => {
+            return <Card cardData={elem} />
+          })
+        }
       </div>
       <Footer />
     </>
