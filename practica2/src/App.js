@@ -16,7 +16,7 @@ function App() {
       <div className="container">
         {
           movies.map(elem => {
-            return <Card cardData={elem} />
+            return <Card key={elem.id} cardData={elem} />
           })
         }
       </div>
