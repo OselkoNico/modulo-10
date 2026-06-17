@@ -63,3 +63,8 @@ button {
   cursor: pointer;
   transition: background-color 400ms ease-in-out;
 }
+
+button[disabled] {
+  background-color: #6a6a6a;
+  cursor: not-allowed;
+}
