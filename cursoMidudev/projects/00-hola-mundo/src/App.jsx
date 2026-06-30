@@ -7,7 +7,8 @@ export function App () {
         <TwitterFollowCard 
         formatUserName={format} 
         isFollowing 
-        userName="oselko" 
-        name="Osel Nicolás Benitez"/>
+        userName="oselko">
+            Osel Nicolás Benitez
+        </TwitterFollowCard>
     )
 }
