@@ -5,8 +5,7 @@ export function App () {
     const format = (userName) => `@${userName}`
     return(
         <TwitterFollowCard 
-        formatUserName={format} 
-        isFollowing 
+        formatUserName={format}  
         userName="oselko">
             Osel Nicolás Benitez
         </TwitterFollowCard>
