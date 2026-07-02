@@ -7,8 +7,17 @@ import { WinnerModal } from './components/WinnerModal';
 import './App.css'
 
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [turn, setTurn] = useState(TURNS.X);
+  const [board, setBoard] = useState(() => {
+    const boardFromStorage = window.localStorage.getItem('board')
+    if (boardFromStorage) return JSON.parse(boardFromStorage)
+      return Array(9).fill(null)
+  });
+
+  const [turn, setTurn] = useState(() => {
+    const turnFromStorage = window.localStorage.getItem('turn')
+    return turnFromStorage ?? TURNS.X
+  });
+
   const [winner, setWinner] = useState(null); // Null es que no hay ganador, y false hay empate
 
   // Para resetear la partida, hay que ponerle los parámetros de inicio
@@ -16,6 +25,9 @@ function App() {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+
+    window.localStorage.removeItem('board')
+    window.localStorage.removeItem('turn')
   }
 
   const updateBoard = (index) => {
@@ -30,6 +42,9 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
 
+    // Con esto guardaremos la partida
+    window.localStorage.setItem('board', JSON.stringify(newBoard))
+    window.localStorage.setItem('turn', turn)
     // Esto revisa si hay ganador
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner){
