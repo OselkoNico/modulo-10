@@ -3,9 +3,24 @@ import { useEffect } from "react"
 
 function App() {
   const [enabled, setEnabled] = useState(false)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     console.log('Effect', { enabled })
+
+    const handleMove = (event) => {
+      const { clientX, clientY } = event
+      setPosition({ x: clientX, y: clientY })
+    }
+    if (enabled) {
+      window.addEventListener('pointermove', handleMove)
+    }
+
+    // CleanUp:
+    // El return se ejecuta cuando el componente se desmonta o cuando cambian las dependencias antes de ejecutar el efecto de nuevo
+    return () => {
+      window.removeEventListener('pointermove', handleMove)
+    }
   }, [enabled])
   return (
     <main>
@@ -19,7 +34,7 @@ function App() {
         top: -20,
         width: 40,
         height: 40,
-        transform: 'translate(0px, 0px)'
+        transform: `translate(${position.x}px, ${position.y}px)`
       }}
       />
       <button onClick={() => setEnabled(!enabled)}> {enabled ? 'Desactivar' : 'Activar'} seguir puntero</button>
